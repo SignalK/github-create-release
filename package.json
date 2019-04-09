@@ -1,0 +1,25 @@
+{
+  "name": "github-create-release",
+  "version": "1.0.0",
+  "description": "Create a GitHub Release Using Pull Requests",
+  "main": "index.js",
+  "keywords": [
+    "signalk-node-server-plugin"
+  ],
+  "author": "scott@scottbender.net",
+  "license": "Aapche 2.0",
+  "dependencies": {
+    "@octokit/plugin-throttling": "^2.4.0",
+    "@octokit/rest": "^16.23.2",
+    "debug": "^3.1.0",
+    "lodash": "^4.17.4",
+    "minimist": "^1.2.0"
+  },
+  "bin": {
+    "github-create-release": "./bin/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SignalK/github-create-release"
+  }
+}
