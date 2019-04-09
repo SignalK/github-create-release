@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "Create a GitHub Release Using Pull Requests",
   "main": "index.js",
-  "keywords": [
-    "signalk-node-server-plugin"
-  ],
   "author": "scott@scottbender.net",
   "license": "Aapche 2.0",
   "dependencies": {
