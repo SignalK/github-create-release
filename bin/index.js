@@ -30,6 +30,7 @@ const argv = require('minimist')(process.argv.slice(2))
 const repo = argv['repository']
 const owner = argv['owner']
 const updateAll = argv['update-all']
+const npmBaseUrl = argv['npm-base-url']
 
 async function main() {
   
@@ -54,8 +55,9 @@ async function main() {
           }
         }
       }
-      
-      body += `\n\n[This version in npm](https://www.npmjs.com/package/@${owner}/${repo}/v/${prev.slice(1)})`
+
+      const baseUrl = npmBaseUrl ? npmBaseUrl : `https://www.npmjs.com/package/@${owner}/${repo}`
+      body += `\n\n[This version in npm](${baseUrl}/v/${prev.slice(1)})`
       try {
         await octokit.repos.createRelease({owner, repo, tag_name: prev, body:body})
       } catch ( e ) {
