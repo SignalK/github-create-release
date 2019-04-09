@@ -1,5 +1,5 @@
 {
-  "name": "github-create-release",
+  "name": "@signalk/github-create-release",
   "version": "1.0.0",
   "description": "Create a GitHub Release Using Pull Requests",
   "main": "index.js",
