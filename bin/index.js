@@ -53,7 +53,7 @@ async function main() {
             const pr = prs.data.items[0]
             if ( donePRs.indexOf(pr.number) == -1 ) {
               donePRs.push(pr.number)
-              body += `+ [#${pr.number}](${pr.pull_request.url}) ${pr.title} (@${pr.user.login})\n`
+              body += `+ [#${pr.number}](${pr.pull_request.html_url}) ${pr.title} (@${pr.user.login})\n`
             }
           }
         }
