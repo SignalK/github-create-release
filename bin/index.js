@@ -20,6 +20,9 @@ const opts = {
 const token = process.env.PR_CHANGES_TOKEN
 if ( token ) {
   opts.auth = token
+} else {
+  console.error('This needs PR_CHANGES_TOKEN to work, exiting now..')
+  process.exit(-1)
 }
 
 const octokit = new Octokit(opts)
