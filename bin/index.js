@@ -39,12 +39,24 @@ async function main() {
 
   try
   {
-    const tags = await octokit.repos.listTags({owner, repo, per_page:!updateAll ? 2 : 100, pages:1 })
+    const tags = await octokit.repos.listTags({owner, repo, per_page:!updateAll ? 10 : 100, pages:1 })
 
-    for ( let i = 0; i < tags.data.length; i++ ) {
+    if ( tags.data.length == 0 ) {
+      console.error('no tags found')
+      process.exit(-1)
+    }
+
+    if ( tags.data[0].name.includes('beta') ) {
+      console.log('Not creating release notes for a beta')
+      process.exit(0)
+    }
+
+    let prev = tags.data[0].name
+    for ( let i = 1; i < tags.data.length; i++ ) {
       const tag = tags.data[i]
-      if ( tag.name != 'latest' && i != 0 ) {
-        const prev = tags.data[i-1].name
+      if ( !tag.name.includes('beta') && tag.name != 'latest' ) {
+        console.log(`compare base: ${tag.name} head: ${prev}`)
+        //const commits = { data: { commits: [] } }
         const commits = await octokit.repos.compareCommits({owner, repo, base:tag.name, head:prev})
 
         const donePRs = []
@@ -70,6 +82,7 @@ async function main() {
           await octokit.repos.updateRelease({owner, repo, release_id: release.data.id, prev, body:body})
         }
         console.log(`created or updated ${prev}`)
+        prev = tag.name
         if ( !updateAll ) {
           break
         }
