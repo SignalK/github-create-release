@@ -63,7 +63,7 @@ async function main() {
         let body = ''
         for ( let j = 0; j < commits.data.commits.length; j++ ) {
           const commit = commits.data.commits[j]
-          const prs = await octokit.search.issuesAndPullRequests({ q: `type:pr repo:${owner}/${repo} ${commit.sha}` })
+          const prs = await octokit.search.issuesAndPullRequests({ q: `type:pr repo:${owner}/${repo} is:merged ${commit.sha}` })
           if ( prs.data.items.length > 0 ) {
             const pr = prs.data.items[0]
             if ( donePRs.indexOf(pr.number) == -1 ) {
